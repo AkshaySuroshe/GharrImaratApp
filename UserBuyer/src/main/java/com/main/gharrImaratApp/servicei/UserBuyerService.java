@@ -16,7 +16,7 @@ public interface UserBuyerService {
 
 	public void deleteUserBuyerRecord(UUID userBuyer1ID, UUID userBuyer2ID);
 
-	public Optional<UserBuyer> getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(UUID userBuyer1ID,
+	public UserBuyer getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(UUID userBuyer1ID,
 			UUID userBuyer2ID);
 
 	public UserBuyer getSingleUserBuyerRecordByEmailAndPassword(String userBuyerEmail, String userBuyerPassword);

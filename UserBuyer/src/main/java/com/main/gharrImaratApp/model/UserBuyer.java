@@ -44,13 +44,14 @@ public class UserBuyer {
 	@Email(message = "Invalid email format")
 	private String userBuyerEmail;
 	@NotNull(message = "Password cannot be null")
-    @Size(min = 6, max = 255, message = "Password must be between 6 and 255 characters")
+    @Size(min = 6, max = 10, message = "Password must be between 6 and 255 characters")
 	private String userBuyerPassword;
 	@Pattern(regexp = "\\d{10}", message = "Contact number must be 10 digits")
 	private String userBuyerContact;
 	private String userBuyerAddress;
 	private String localTime;
 	private String localDate;
+	private String userType;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<FavoritePropertiesRentAndBuy> favoritePropertiesRentAndBuyList;
 	@ManyToMany(cascade = CascadeType.ALL)

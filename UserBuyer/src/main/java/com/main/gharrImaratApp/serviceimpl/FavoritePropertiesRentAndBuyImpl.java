@@ -33,53 +33,53 @@ public class FavoritePropertiesRentAndBuyImpl implements FavoritePropertiesRentA
     @Autowired
     UserBuyerRepository userBuyerRepository;
 
-    @Override
-    public UserBuyer addPropertyRentANdBuyToUserBuyer(UUID userBuyer1ID, UUID userBuyer2ID, String text,
-            MultipartFile[] image) {
-
-        Optional<UserBuyer> userBuyer = userBuyerRepository.findByUserBuyer1IDAndUserBuyer2ID(userBuyer1ID,
-                userBuyer2ID);
-        if (userBuyer.isPresent()) 
-        {
-            UserBuyer userBuyerDetails = userBuyer.get(); // Moved inside the if block
-            ObjectMapper mapper = new ObjectMapper();
-            try {
-                FavoritePropertiesRentAndBuy favoritePropertiesRentAndBuy = mapper.readValue(text,
-                        FavoritePropertiesRentAndBuy.class);
-
-                if (image != null) {
-                    List<PropertyImages> propertyImageslist = new ArrayList<>();
-                    for (MultipartFile img : image) { // processing each image
-                        PropertyImages propertyImage = new PropertyImages();
-                        propertyImage.setImageFile(img.getBytes());
-                        propertyImageslist.add(propertyImage);
-                    }
-                    favoritePropertiesRentAndBuy.setPropertyImages(propertyImageslist);
-                    favoritePropertiesRentAndBuy.setUserBuyer1ID(userBuyer1ID);
-                    favoritePropertiesRentAndBuy.setUserBuyer2ID(userBuyer2ID);
-                    LocalTime localtime = LocalTime.now();
-                    LocalDate localdate = LocalDate.now();
-                    favoritePropertiesRentAndBuy.setLocalTime(localtime.toString());
-                    favoritePropertiesRentAndBuy.setLocalDate(localdate.toString());
-                    
-
-                    userBuyerDetails.getFavoritePropertiesRentAndBuyList().add(favoritePropertiesRentAndBuy);
-
-                    return userBuyerRepository.save(userBuyerDetails);
-                }
-            } catch (JsonMappingException e) {
-                // Handle JSON mapping exception
-                e.printStackTrace();
-            } catch (JsonProcessingException e) {
-                // Handle JSON processing exception
-                e.printStackTrace();
-            } catch (IOException e) {
-                // Handle IO exception
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
+//    @Override
+//    public UserBuyer addPropertyRentANdBuyToUserBuyer(UUID userBuyer1ID, UUID userBuyer2ID, String text,
+//            MultipartFile[] image) {
+//
+//        Optional<UserBuyer> userBuyer = userBuyerRepository.findByUserBuyer1IDAndUserBuyer2ID(userBuyer1ID,
+//                userBuyer2ID);
+//        if (userBuyer.isPresent()) 
+//        {
+//            UserBuyer userBuyerDetails = userBuyer.get(); // Moved inside the if block
+//            ObjectMapper mapper = new ObjectMapper();
+//            try {
+//                FavoritePropertiesRentAndBuy favoritePropertiesRentAndBuy = mapper.readValue(text,
+//                        FavoritePropertiesRentAndBuy.class);
+//
+//                if (image != null) {
+//                    List<PropertyImages> propertyImageslist = new ArrayList<>();
+//                    for (MultipartFile img : image) { // processing each image
+//                        PropertyImages propertyImage = new PropertyImages();
+//                        propertyImage.setImageFile(img.getBytes());
+//                        propertyImageslist.add(propertyImage);
+//                    }
+////                    favoritePropertiesRentAndBuy.setPropertyImages(propertyImageslist);
+////                    favoritePropertiesRentAndBuy.setUserBuyer1ID(userBuyer1ID);
+////                    favoritePropertiesRentAndBuy.setUserBuyer2ID(userBuyer2ID);
+//                    LocalTime localtime = LocalTime.now();
+//                    LocalDate localdate = LocalDate.now();
+//                    favoritePropertiesRentAndBuy.setLocalTime(localtime.toString());
+//                    favoritePropertiesRentAndBuy.setLocalDate(localdate.toString());
+//                    
+//
+//                    userBuyerDetails.getFavoritePropertiesRentAndBuyList().add(favoritePropertiesRentAndBuy);
+//
+//                    return userBuyerRepository.save(userBuyerDetails);
+//                }
+//            } catch (JsonMappingException e) {
+//                // Handle JSON mapping exception
+//                e.printStackTrace();
+//            } catch (JsonProcessingException e) {
+//                // Handle JSON processing exception
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                // Handle IO exception
+//                e.printStackTrace();
+//            }
+//        }
+//        return null;
+//    }
 
     @Override
     public List<FavoritePropertiesRentAndBuy> getPropertyByRentAndBuy(UUID userBuyer1ID, UUID userBuyer2ID) {
@@ -105,50 +105,69 @@ public class FavoritePropertiesRentAndBuyImpl implements FavoritePropertiesRentA
     }
 
 	@Override
-	public List<FavoritePropertiesRentAndBuy> getFilteredProperties(String propertyLocality, int price,
-			String propertyType, String furnishing, String facing, String constructionPhase, String flatBHK) {
-		
-		List<FavoritePropertiesRentAndBuy> list=favoritePropertiesRentAndBuyRepository.findAll();
-	     Stream<FavoritePropertiesRentAndBuy> stream = list.stream();
-	     
-	     if(!propertyLocality.equals("null"))
-	     {
-	    	 stream = stream.filter(prop->(prop.getPropertyLocality().equals(propertyLocality)));
-	     }
-	     if(price > 0)
-	     {
-	    	 System.out.println("check price");
-	    	 stream=stream.filter(prop->prop.getPrice()<=price);
-	     }
-	     if(!propertyType.equals("null"))
-	     {
-	    	 System.out.println("Check Property Type");
-	    	 stream=stream.filter(prop->prop.getPropertyTYPE().equals(propertyType));
-	     }
-	     if(!furnishing.equals("null"))
-	     {
-	    	 System.out.println("Check furnishing");
-	    	 stream=stream.filter(prop->prop.getFurnishing().equals(furnishing));
-	     }
-	     if(!facing.equals("null"))
-	     {
-	    	 System.out.println("check facing");
-	    	 stream=stream.filter(prop->prop.getFacing().equals(facing));
-	     }
-	     if(!constructionPhase.equals(constructionPhase))
-	     {
-	    	 System.out.println("Check Construction Phase");
-	    	 stream=stream.filter(prop->prop.getConstructionPhase().equals(constructionPhase));
-	     }
-	     if(!flatBHK.equals("null"))
-	     {
-	    	 System.out.println("Check Flat BHK");
-	    	 stream=stream.filter(prop->prop.getFlatBHK().equals(flatBHK));
-	     }
-	     List<FavoritePropertiesRentAndBuy>list1=stream.collect(Collectors.toList());
-	    	 
-		return list1;
+	public UserBuyer addPropertyRentANdBuyToUserBuyer(UUID userBuyer1ID, UUID userBuyer2ID,
+			FavoritePropertiesRentAndBuy favoritePropertiesRentAndBuy) {
+		Optional<UserBuyer> userOptional= userBuyerRepository.findByUserBuyer1IDAndUserBuyer2ID(userBuyer1ID, userBuyer2ID);
+		if(userOptional.isPresent())
+		{
+		UserBuyer userBuyer=	userOptional.get();
+		userBuyer.getFavoritePropertiesRentAndBuyList().add(favoritePropertiesRentAndBuy);
+		return userBuyerRepository.save(userBuyer);
+		}
+		return null;
 	}
+
+	@Override
+	public FavoritePropertiesRentAndBuy deleteProperty(UUID propertyRBID) {
+		favoritePropertiesRentAndBuyRepository.deleteById(propertyRBID);
+		return null;
+	}
+
+//	@Override
+//	public List<FavoritePropertiesRentAndBuy> getFilteredProperties(String propertyLocality, int price,
+//			String propertyType, String furnishing, String facing, String constructionPhase, String flatBHK) {
+//		
+//		List<FavoritePropertiesRentAndBuy> list=favoritePropertiesRentAndBuyRepository.findAll();
+//	     Stream<FavoritePropertiesRentAndBuy> stream = list.stream();
+//	     
+//	     if(!propertyLocality.equals("null"))
+//	     {
+//	    	 stream = stream.filter(prop->(prop.getPropertyLocality().equals(propertyLocality)));
+//	     }
+//	     if(price > 0)
+//	     {
+//	    	 System.out.println("check price");
+//	    	 stream=stream.filter(prop->prop.getPrice()<=price);
+//	     }
+//	     if(!propertyType.equals("null"))
+//	     {
+//	    	 System.out.println("Check Property Type");
+//	    	 stream=stream.filter(prop->prop.getPropertyTYPE().equals(propertyType));
+//	     }
+//	     if(!furnishing.equals("null"))
+//	     {
+//	    	 System.out.println("Check furnishing");
+//	    	 stream=stream.filter(prop->prop.getFurnishing().equals(furnishing));
+//	     }
+//	     if(!facing.equals("null"))
+//	     {
+//	    	 System.out.println("check facing");
+//	    	 stream=stream.filter(prop->prop.getFacing().equals(facing));
+//	     }
+//	     if(!constructionPhase.equals(constructionPhase))
+//	     {
+//	    	 System.out.println("Check Construction Phase");
+//	    	 stream=stream.filter(prop->prop.getConstructionPhase().equals(constructionPhase));
+//	     }
+//	     if(!flatBHK.equals("null"))
+//	     {
+//	    	 System.out.println("Check Flat BHK");
+//	    	 stream=stream.filter(prop->prop.getFlatBHK().equals(flatBHK));
+//	     }
+//	     List<FavoritePropertiesRentAndBuy>list1=stream.collect(Collectors.toList());
+//	    	 
+//		return list1;
+//	}
 
 
 

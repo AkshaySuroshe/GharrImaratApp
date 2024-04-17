@@ -50,9 +50,9 @@ public class SharingRoomsServiceImpl implements SharingRoomsService {
 						propertyImages.setImageFile(image.getBytes());
 						propertyImagesList.add(propertyImages);
 					}
-					sharingRooms.getPropertyImages().addAll(propertyImagesList);
+//					sharingRooms.getPropertyImages().addAll(propertyImagesList);
 					sharingRooms.setPropertyPGID(propertyPGID);
-					favoritePropertiesPGDetails.getSharingRooms().add(sharingRooms);
+//					favoritePropertiesPGDetails.getSharingRooms().add(sharingRooms);
 					return favoritePropertiesPGRepository.save(favoritePropertiesPGDetails);
 
 				}
@@ -72,13 +72,13 @@ public class SharingRoomsServiceImpl implements SharingRoomsService {
 	public SharingRooms updateSharingRoomsReviewsPG(UUID roomPGID, PropertyReview propertyReview) {
 
 		SharingRooms sharingRooms = sharingRoomsRepository.findByRoomPGID(roomPGID);
-		List<PropertyReview> sharingRoomsList = sharingRooms.getPropertyReviews();
-		sharingRoomsList.add(propertyReview);
+//		List<PropertyReview> sharingRoomsList = sharingRooms.getPropertyReviews();
+//		sharingRoomsList.add(propertyReview);
 		 LocalTime localtime = LocalTime.now();
 		 LocalDate localdate = LocalDate.now();
 		 propertyReview.setLocalTime(localtime.toString());
 		 propertyReview.setLocalDate(localdate.toString());
-		sharingRooms.setPropertyReviews(sharingRoomsList);
+//		sharingRooms.setPropertyReviews(sharingRoomsList);
 		return sharingRoomsRepository.save(sharingRooms);
 	}
 

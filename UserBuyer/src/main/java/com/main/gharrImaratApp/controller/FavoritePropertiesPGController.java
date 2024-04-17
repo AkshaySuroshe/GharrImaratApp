@@ -66,17 +66,17 @@ public class FavoritePropertiesPGController {
 		return list;
 	}
 	
-	@GetMapping("/properties/users/filters/pg/{locality}/{onePersonRent}/{availableFor}/{foodAvailability}/{acRoomsAvailability}/{powerBackup}")
-	public ResponseEntity<List<FavoritePropertiesPG>> getFilteredPGProperties(
-			@PathVariable(required = false) String locality,
-			@PathVariable(required = false) int onePersonRent,
-			@PathVariable(required = false) String availableFor,
-			@PathVariable(required = false) String foodAvailability,
-			@PathVariable(required = false) String acRoomsAvailability,
-			@PathVariable(required = false) String powerBackup)
-	{
-		List<FavoritePropertiesPG> list=favoritePropertiesPGServicei.getFilteredPGProperties(locality, onePersonRent, availableFor, foodAvailability, acRoomsAvailability, powerBackup);
-		return new ResponseEntity<List<FavoritePropertiesPG>>(list, HttpStatus.OK);
-	}
+//	@GetMapping("/properties/users/filters/pg/{locality}/{onePersonRent}/{availableFor}/{foodAvailability}/{acRoomsAvailability}/{powerBackup}")
+//	public ResponseEntity<List<FavoritePropertiesPG>> getFilteredPGProperties(
+//			@PathVariable(required = false) String locality,
+//			@PathVariable(required = false) int onePersonRent,
+//			@PathVariable(required = false) String availableFor,
+//			@PathVariable(required = false) String foodAvailability,
+//			@PathVariable(required = false) String acRoomsAvailability,
+//			@PathVariable(required = false) String powerBackup)
+//	{
+//		List<FavoritePropertiesPG> list=favoritePropertiesPGServicei.getFilteredPGProperties(locality, onePersonRent, availableFor, foodAvailability, acRoomsAvailability, powerBackup);
+//		return new ResponseEntity<List<FavoritePropertiesPG>>(list, HttpStatus.OK);
+//	}
 	
 }

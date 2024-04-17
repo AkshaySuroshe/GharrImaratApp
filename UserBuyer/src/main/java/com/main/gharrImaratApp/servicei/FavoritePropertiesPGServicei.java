@@ -19,8 +19,8 @@ public interface FavoritePropertiesPGServicei {
 
 	List<FavoritePropertiesPG> getPropertyPGByAvailableFor(String availableFor);
 
-	List<FavoritePropertiesPG> getFilteredPGProperties(String locality, int onePersonRent, String availableFor,
-			String foodAvailability, String acRoomsAvailability, String powerBackup);
+//	List<FavoritePropertiesPG> getFilteredPGProperties(String locality, int onePersonRent, String availableFor,
+//			String foodAvailability, String acRoomsAvailability, String powerBackup);
 
 
 //	FavoritePropertiesPG updateSharingRoomsPG(UUID propertyPGID, String text, MultipartFile[] images);

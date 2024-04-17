@@ -16,11 +16,13 @@ import com.main.gharrImaratApp.servicei.UserBuyerService;
 
 import jakarta.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
+@CrossOrigin("*")
 public class UserBuyerController {
 	
 	@Autowired UserBuyerService userBuyerService;
@@ -51,7 +53,7 @@ public class UserBuyerController {
             @RequestBody UserBuyer updatedUserBuyer)
     {
 		
-		Optional<UserBuyer> existingUserBuyer=userBuyerService.getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(userBuyer1ID, userBuyer2ID);
+		UserBuyer existingUserBuyer=userBuyerService.getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(userBuyer1ID, userBuyer2ID);
 		if(existingUserBuyer ==null)
 		{
 			return new ResponseEntity<UserBuyer>(HttpStatus.NOT_FOUND);
@@ -68,17 +70,18 @@ public class UserBuyerController {
             @PathVariable UUID userBuyer2ID)
 	{
 		userBuyerService.deleteUserBuyerRecord(userBuyer1ID, userBuyer2ID);
-		return new ResponseEntity<UserBuyer>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<UserBuyer>(HttpStatus.OK);
 	}
     
 	
 	//get:- getSingleUserBuyerRecord(“/users/buyer/{userBuyer1ID}/{userBuyer2ID}”)
 	@GetMapping("/users/buyer/{userBuyer1ID}/{userBuyer2ID}")
-	public Optional<UserBuyer> getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(
+	public UserBuyer getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(
 			@PathVariable UUID userBuyer1ID,
             @PathVariable UUID userBuyer2ID)
 	{
-		Optional<UserBuyer> userBuyer=userBuyerService.getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(userBuyer1ID, userBuyer2ID);
+		UserBuyer userBuyer=userBuyerService.getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(userBuyer1ID, userBuyer2ID);
+		System.out.println(userBuyer);
 		return userBuyer;
 	}
 	
@@ -90,6 +93,7 @@ public class UserBuyerController {
 			@PathVariable String userBuyerPassword)
 	{
 		UserBuyer userBuyer=userBuyerService.getSingleUserBuyerRecordByEmailAndPassword(userBuyerEmail, userBuyerPassword);
+		System.out.println(userBuyer);
 		if (userBuyer != null) 
 		{
 			return new ResponseEntity<>(userBuyer, HttpStatus.OK);

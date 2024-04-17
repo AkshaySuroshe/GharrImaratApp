@@ -29,22 +29,22 @@ public class SharingRooms {
 	private UUID propertyPGID;
 	@NotBlank(message="RoomNo cannot be blank")
 	private String roomNo; 
-	@NotBlank(message="sharing cananot be blank")
-	private String sharing;
-	@Min(value = 0, message = "Rent must be a positive number")
-	private int rent;
-	@NotBlank(message="availableFor cannot be blank")
-	private String availableFor;
-	@NotBlank(message="foodAvailability cannot be blank")
-	private String foodAvailability; 
-	@NotBlank(message="Amenities cannot be blank")
-	private String amenities;
-	@NotBlank(message="Location cannot be blank")
-	private String location;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	List<PropertyImages> propertyImages = new ArrayList<>();
-	@OneToMany(cascade = CascadeType.ALL)
-	List<PropertyReview> propertyReviews;
+//	@NotBlank(message="sharing cananot be blank")
+//	private String sharing;
+//	@Min(value = 0, message = "Rent must be a positive number")
+//	private int rent;
+//	@NotBlank(message="availableFor cannot be blank")
+//	private String availableFor;
+//	@NotBlank(message="foodAvailability cannot be blank")
+//	private String foodAvailability; 
+//	@NotBlank(message="Amenities cannot be blank")
+//	private String amenities;
+//	@NotBlank(message="Location cannot be blank")
+//	private String location;
+//	
+//	@OneToMany(cascade = CascadeType.ALL)
+//	List<PropertyImages> propertyImages = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL)
+//	List<PropertyReview> propertyReviews;
 
 }

@@ -80,10 +80,11 @@ public class UserBuyerServiceImpl implements UserBuyerService{
 
 
 	@Override
-	public Optional<UserBuyer> getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(UUID userBuyer1ID, UUID userBuyer2ID) {
+	public UserBuyer getSingleUserBuyerRecordByuserBuyer1ID_and_userBuyer2ID(UUID userBuyer1ID, UUID userBuyer2ID) {
 		
 		Optional<UserBuyer> list=userBuyerRepository.findByUserBuyer1IDAndUserBuyer2ID(userBuyer1ID, userBuyer2ID);
-		return list;
+	UserBuyer userBuyer=	list.get();
+		return userBuyer;
 	}
 
 	@Override

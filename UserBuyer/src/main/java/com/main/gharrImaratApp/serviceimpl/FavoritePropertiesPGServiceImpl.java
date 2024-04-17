@@ -93,41 +93,41 @@ public class FavoritePropertiesPGServiceImpl implements FavoritePropertiesPGServ
 		return list;
 	}
 
-	@Override
-	public List<FavoritePropertiesPG> getFilteredPGProperties(String locality, int onePersonRent,
-			String availableFor, String foodAvailability, String acRoomsAvailability, String powerBackup) {
-		
-		List<FavoritePropertiesPG> list=favoritePropertiesPGRepository.findAll();
-		Stream<FavoritePropertiesPG> stream=list.stream();
-		
-		if(!locality.equals("null"))
-		{
-			stream=stream.filter(prop->(prop.getLocality().equals(locality)));
-		}
-		if(onePersonRent > 0)
-		{
-			stream=stream.filter(prop->(prop.getOnePersonRent()<=onePersonRent));
-		}
-		if(!availableFor.equals("null"))
-		{
-			stream=stream.filter(prop->(prop.getAvailableFor().equals(availableFor)));
-		}
-		if(!foodAvailability.equals("null"))
-		{
-			stream=stream.filter(prop->(prop.getFoodAvailability().equals(foodAvailability)));
-		}
-		if(!acRoomsAvailability.equals("null"))
-		{
-			stream=stream.filter(prop->(prop.getAcRoomsAvailability().equals(acRoomsAvailability)));
-		}
-		if(!powerBackup.equals("null"))
-		{
-			stream=stream.filter(prop->(prop.getPowerBackup().equals(powerBackup)));
-		}
-		List<FavoritePropertiesPG> list1=stream.collect(Collectors.toList());
-		
-		return list1;
-	}
+//	@Override
+//	public List<FavoritePropertiesPG> getFilteredPGProperties(String locality, int onePersonRent,
+//			String availableFor, String foodAvailability, String acRoomsAvailability, String powerBackup) {
+//		
+//		List<FavoritePropertiesPG> list=favoritePropertiesPGRepository.findAll();
+//		Stream<FavoritePropertiesPG> stream=list.stream();
+//		
+//		if(!locality.equals("null"))
+//		{
+//			stream=stream.filter(prop->(prop.getLocality().equals(locality)));
+//		}
+//		if(onePersonRent > 0)
+//		{
+//			stream=stream.filter(prop->(prop.getOnePersonRent()<=onePersonRent));
+//		}
+//		if(!availableFor.equals("null"))
+//		{
+//			stream=stream.filter(prop->(prop.getAvailableFor().equals(availableFor)));
+//		}
+//		if(!foodAvailability.equals("null"))
+//		{
+//			stream=stream.filter(prop->(prop.getFoodAvailability().equals(foodAvailability)));
+//		}
+//		if(!acRoomsAvailability.equals("null"))
+//		{
+//			stream=stream.filter(prop->(prop.getAcRoomsAvailability().equals(acRoomsAvailability)));
+//		}
+//		if(!powerBackup.equals("null"))
+//		{
+//			stream=stream.filter(prop->(prop.getPowerBackup().equals(powerBackup)));
+//		}
+//		List<FavoritePropertiesPG> list1=stream.collect(Collectors.toList());
+//		
+//		return list1;
+//	}
 	
 
 }
